@@ -3,7 +3,6 @@
 morpion = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
 joueur = ""
 nbtour = 0
-test = "test"
 
 
 def afficher(): # une fonction bidon pour éviter d'utiliser cette horreur à chaque affichage
