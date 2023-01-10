@@ -1,14 +1,12 @@
 #! python3
 
-morpion = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
+morpion = [["1", "2", "3"], ["4", "5", "6"], ["7", "8", "9"]]
 joueur = ""
 nbtour = 0
 
 
 def afficher(): # une fonction bidon pour éviter d'utiliser cette horreur à chaque affichage
-    print(morpion[0],morpion[1], morpion[2])
-    print(morpion[3],morpion[4], morpion[5])
-    print(morpion[6],morpion[7], morpion[8] + "\n")
+    print(f"{morpion[0]}\n{morpion[1]}\n{morpion[2]}\n")
 
 
 # fonction principale pour positionner un pion X ou O à une position entre 1 et 9
