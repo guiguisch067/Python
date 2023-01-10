@@ -12,7 +12,7 @@ def afficher(): # une fonction bidon pour éviter d'utiliser cette horreur à ch
 # fonction principale pour positionner un pion X ou O à une position entre 1 et 9
 def jeu(nbtour,joueur): 
     # On choisit le pion joué au premier tour uniquement
-    test_pionOK= True
+    test_pionOK = True
     if nbtour == 0:
         while test_pionOK: # On vérifie le pion joué
             # variable temporaire pour vérifier l'entrée
@@ -33,9 +33,17 @@ def jeu(nbtour,joueur):
     while test_caseOK:
         # variable temporaire pour vérifier l'entrée
         test_numcase = input("Indiquer la case à jouer :\n1, 2, 3,\n4, 5, 6,\n7, 8, 9\n -->")
+        if int(test_numcase) > 3:
+            v1 = int(test_numcase) - 3
+        else:
+            v1 = 0
+        print(f"Je suis V1 : {v1}")
+        v2 = v1 % 3
+        print(f"Je suis V2 : {v2}")
+        print(morpion[v1][v2])
         # On vérifie la position choisie
         if int(test_numcase) >= 1 and int(test_numcase) <=9:
-            if morpion[int(test_numcase)-1] == "X" or morpion[int(test_numcase)-1] == "O":
+            if morpion[v1][v2] == "X" or morpion[v1][v2] == "O":
                 print("__ERREUR__ : Cette case est déjà jouée, il faut en choisir une autre ! \n")
             else:
                 numcase = test_numcase
@@ -44,7 +52,7 @@ def jeu(nbtour,joueur):
             # Entrée erronée, on boucle jusqu'à que ce soit valide
             print("__ERREUR__ : Entrez un chiffre entre 1 et 9")
     print(f"\nVous avez choisit la case numéro : {numcase}\n")
-    morpion[int(numcase)-1] = joueur # conversion dégueulasse pour ne pas commencer à 0 du pdv joueur
+    morpion[v1][v2] = joueur # conversion dégueulasse pour ne pas commencer à 0 du pdv joueur
     afficher()
     return joueur
 
@@ -108,10 +116,10 @@ def condition_victoire(): # Fonction qui vérifie si une condition de victoireOK
 
 if __name__ == "__main__":
     joueur = jeu(nbtour,joueur)
-    while (nbtour < 9) and (condition_victoire() == False) : #tant que la victoire n'est pas déclarée on continue à jouer
+    while (nbtour < 9): #and (condition_victoire() == False) : #tant que la victoire n'est pas déclarée on continue à jouer
         nbtour += 1
         joueur = jeu(nbtour,joueur)
-        if condition_victoire():
-            print(f"_VICTOIRE_ du joueur : --- {joueur} ---")
+        #if condition_victoire():
+        #    print(f"_VICTOIRE_ du joueur : --- {joueur} ---")
     if nbtour >= 9:
         print("Nombre de tour terminé : __EGALITE__ !")
