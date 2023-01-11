@@ -83,7 +83,7 @@ def condition_victoire_v2(joueur: str) -> bool:
         i += 1
     return is_victoire
 
-
+'''
 def condition_victoire(): # Fonction qui vérifie si une condition de is_victoire est remplie
     #lignes
     is_victoire = False
@@ -139,7 +139,7 @@ def condition_victoire(): # Fonction qui vérifie si une condition de is_victoir
         is_victoire = True
     
     return is_victoire
-
+'''
 
 if __name__ == "__main__":
     joueur = jeu(nbtour,joueur)
