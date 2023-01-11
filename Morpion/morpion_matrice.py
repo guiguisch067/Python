@@ -36,8 +36,8 @@ def jeu(nbtour,joueur):
         # On vérifie la position choisie
         if int(test_numcase) >= 1 and int(test_numcase) <=9:
             # si l'entrée utilisateur est valide, on initialise les posiitons ligne et colonne
-            ligne = (int(test_numcase) -1) // 3
-            col = int(test_numcase) % 3
+            ligne = int(test_numcase) // 3
+            col = (int(test_numcase) - 1) % 3
             if morpion[ligne][col] == "X" or morpion[ligne][col] == "O":
                 print("__ERREUR__ : Cette case est déjà jouée, il faut en choisir une autre ! \n")
             else:
@@ -53,59 +53,17 @@ def jeu(nbtour,joueur):
     return joueur
 
 
-def condition_victoire(): # Fonction qui vérifie si une condition de victoireOK est remplie
+def condition_victoire(joueur): # Fonction qui vérifie si une condition de victoireOK est remplie
     #lignes
     victoireOK = False
-    if morpion[0] == "X" and morpion[1] == "X" and morpion[2] == "X":
-        print("victoire ligne 1")
-        victoireOK = True
-    if morpion[3] == "X" and morpion[4] == "X" and morpion[5] == "X":
-        print("victoire ligne 2")
-        victoireOK = True
-    if morpion[6] == "X" and morpion[7] == "X" and morpion[8] == "X":
-        print("victoire ligne 3")
-        victoireOK = True
-    if morpion[0] == "O" and morpion[1] == "O" and morpion[2] == "O":
-        print("victoire ligne 1")
-        victoireOK = True
-    if morpion[3] == "O" and morpion[4] == "O" and morpion[5] == "O":
-        print("victoire ligne 2")
-        victoireOK = True
-    if morpion[6] == "O" and morpion[7] == "O" and morpion[8] == "O":
-        print("victoire ligne 3")
-        victoireOK = True
+    for i in range(morpion):
+        if morpion[i] == joueur:
+            victoireOK = True
+    
     #colonnes
-    if morpion[0] == "X" and morpion[3] == "X" and morpion[6] == "X":
-        print("victoire colonne 1")
-        victoireOK = True
-    if morpion[1] == "X" and morpion[4] == "X" and morpion[7] == "X":
-        print("victoire colonne 2")
-        victoireOK = True
-    if morpion[2] == "X" and morpion[5] == "X" and morpion[8] == "X":
-        print("victoire colonne 3")
-        victoireOK = True
-    if morpion[0] == "O" and morpion[3] == "O" and morpion[6] == "O":
-        print("victoire colonne 1")
-        victoireOK = True
-    if morpion[1] == "O" and morpion[4] == "O" and morpion[7] == "O":
-        print("victoire colonne 2")
-        victoireOK = True
-    if morpion[2] == "O" and morpion[5] == "O" and morpion[8] == "O":
-        print("victoire colonne 3")
-        victoireOK = True
+    
     #diagonales
-    if morpion[0] == "X" and morpion[4] == "X" and morpion[8] == "X":
-        print("victoire diagonale 1")
-        victoireOK = True
-    if morpion[2] == "X" and morpion[4] == "X" and morpion[7] == "X":
-        print("victoire diagonale 2")
-        victoireOK = True
-    if morpion[0] == "O" and morpion[4] == "O" and morpion[8] == "O":
-        print("victoire diagonale 1")
-        victoireOK = True
-    if morpion[2] == "O" and morpion[4] == "O" and morpion[7] == "O":
-        print("victoire diagonale 2")
-        victoireOK = True
+    
     
     return victoireOK
 
