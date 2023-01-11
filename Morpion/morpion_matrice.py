@@ -32,12 +32,12 @@ def jeu(nbtour,joueur):
     test_caseOK = True # booléen pour contrôler la boucle
     while test_caseOK:
         # variable temporaire pour vérifier l'entrée
-        test_numcase = input("Indiquer la case à jouer :\n1, 2, 3,\n4, 5, 6,\n7, 8, 9\n -->")
+        test_numcase = int(input("Indiquer la case à jouer :\n1, 2, 3,\n4, 5, 6,\n7, 8, 9\n -->"))
         # On vérifie la position choisie
-        if int(test_numcase) >= 1 and int(test_numcase) <=9:
+        if int(test_numcase) >= 1 and int(test_numcase) <= 9:
             # si l'entrée utilisateur est valide, on initialise les posiitons ligne et colonne
-            ligne = int(test_numcase) // 3
-            col = (int(test_numcase) - 1) % 3
+            ligne = (test_numcase - 1) // 3
+            col = (test_numcase - 1) % 3
             if morpion[ligne][col] == "X" or morpion[ligne][col] == "O":
                 print("__ERREUR__ : Cette case est déjà jouée, il faut en choisir une autre ! \n")
             else:
