@@ -33,17 +33,12 @@ def jeu(nbtour,joueur):
     while test_caseOK:
         # variable temporaire pour vérifier l'entrée
         test_numcase = input("Indiquer la case à jouer :\n1, 2, 3,\n4, 5, 6,\n7, 8, 9\n -->")
-        if int(test_numcase) > 3:
-            v1 = int(test_numcase) - 3
-        else:
-            v1 = 0
-        print(f"Je suis V1 : {v1}")
-        v2 = v1 % 3
-        print(f"Je suis V2 : {v2}")
-        print(morpion[v1][v2])
         # On vérifie la position choisie
         if int(test_numcase) >= 1 and int(test_numcase) <=9:
-            if morpion[v1][v2] == "X" or morpion[v1][v2] == "O":
+            # si l'entrée utilisateur est valide, on initialise les posiitons ligne et colonne
+            ligne = (int(test_numcase) -1) // 3
+            col = int(test_numcase) % 3
+            if morpion[ligne][col] == "X" or morpion[ligne][col] == "O":
                 print("__ERREUR__ : Cette case est déjà jouée, il faut en choisir une autre ! \n")
             else:
                 numcase = test_numcase
@@ -52,7 +47,8 @@ def jeu(nbtour,joueur):
             # Entrée erronée, on boucle jusqu'à que ce soit valide
             print("__ERREUR__ : Entrez un chiffre entre 1 et 9")
     print(f"\nVous avez choisit la case numéro : {numcase}\n")
-    morpion[v1][v2] = joueur # conversion dégueulasse pour ne pas commencer à 0 du pdv joueur
+    # On entre le pion du joueur à la valeur sélectionnée
+    morpion[ligne][col] = joueur
     afficher()
     return joueur
 
