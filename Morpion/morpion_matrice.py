@@ -56,9 +56,10 @@ def jeu(nbtour,joueur):
 def condition_victoire(joueur): # Fonction qui vérifie si une condition de victoireOK est remplie
     #lignes
     victoireOK = False
-    for i in range(morpion):
-        if morpion[i] == joueur:
-            victoireOK = True
+    for i in range(len(morpion)):
+        for j in range(len(morpion[i])):
+            if morpion[i][j] == joueur:
+                victoireOK = True
     
     #colonnes
     
@@ -70,10 +71,10 @@ def condition_victoire(joueur): # Fonction qui vérifie si une condition de vict
 
 if __name__ == "__main__":
     joueur = jeu(nbtour,joueur)
-    while (nbtour < 9): #and (condition_victoire() == False) : #tant que la victoire n'est pas déclarée on continue à jouer
+    while (nbtour < 9) and (condition_victoire(joueur) == False) : #tant que la victoire n'est pas déclarée on continue à jouer
         nbtour += 1
         joueur = jeu(nbtour,joueur)
-        #if condition_victoire():
-        #    print(f"_VICTOIRE_ du joueur : --- {joueur} ---")
+        if condition_victoire(joueur):
+            print(f"_VICTOIRE_ du joueur : --- {joueur} ---")
     if nbtour >= 9:
         print("Nombre de tour terminé : __EGALITE__ !")
