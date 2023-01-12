@@ -1,5 +1,7 @@
 #! python3
 
+# source : https://github.com/guiguisch067/Python/blob/main/Morpion/morpion_matrice.py
+
 morpion = [["1", "2", "3"], ["4", "5", "6"], ["7", "8", "9"]]
 joueur = ""
 nbtour = 0
@@ -16,14 +18,14 @@ def jeu(nbtour,joueur):
     if nbtour == 0:
         while test_pionOK: # On vérifie le pion joué
             # variable temporaire pour vérifier l'entrée
-            test_pionjoueur = input("\nIndiquer le pion du joueur : X ou O\n-->")
-            if str(test_pionjoueur) == ("X") or str(test_pionjoueur) == ("O"):
+            test_pionjoueur = str(input("\nIndiquer le pion du joueur : X ou O\n--> "))
+            if test_pionjoueur in ["X", "O"]:
                 joueur = test_pionjoueur
                 test_pionOK = False
             else: # Entrée erronée, on boucle jusqu'à que ce soit valide
                 print("__ERREUR__ : Veuillez entrer un pion X ou O")                
     # on switch automatiquement le joueur une fois sur 2 après le 1er tour
-    elif joueur == "X": 
+    elif joueur == "X":
         joueur = "O"
     else:
         joueur = "X"
@@ -53,20 +55,28 @@ def jeu(nbtour,joueur):
     return joueur
 
 
-def condition_victoire(joueur): # Fonction qui vérifie si une condition de victoireOK est remplie
-    #lignes
-    victoireOK = False
-    for i in range(len(morpion)):
-        for j in range(len(morpion[i])):
-            if morpion[i][j] == joueur:
-                victoireOK = True
-    
-    #colonnes
-    
-    #diagonales
-    
-    
-    return victoireOK
+def condition_victoire(joueur: str) -> bool:
+    is_victoire = False
+    ligne, col = 0, 0
+    # lignes
+    while ligne < len(morpion):
+        col = 0 # dégueu, mais temporaire - on réinitialise les variables
+        if morpion[ligne][col] is joueur and morpion[ligne][col+1] is joueur and morpion[ligne][col+2] is joueur:
+            is_victoire = True
+        ligne += 1
+    # colonnes
+    while col < len(morpion):
+        ligne = 0 # dégueu, mais temporaire - on réinitialise les variables
+        if morpion[ligne][col] is joueur and morpion[ligne+1][col] is joueur and morpion[ligne+2][col] is joueur:
+            is_victoire = True
+        col += 1
+    # diagonales
+    ligne, col = 0, 0 # dégueu, mais temporaire - on réinitialise les variables
+    if morpion[ligne][col] is joueur and morpion[ligne+1][col+1] is joueur and morpion[ligne+2][col+2] is joueur:
+        is_victoire = True
+    if morpion[ligne][col+2] is joueur and morpion[ligne+1][col+1] is joueur and morpion[ligne+2][col] is joueur:
+        is_victoire = True
+    return is_victoire
 
 
 if __name__ == "__main__":
