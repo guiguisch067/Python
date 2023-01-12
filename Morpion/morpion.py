@@ -61,29 +61,6 @@ def jeu(nbtour: int,joueur : str):
     return joueur
 
 
-def condition_victoire_v2(joueur: str) -> bool:
-    is_victoire = False
-    i = 0
-    while i < len(morpion):
-        # lignes
-        if i in [0, 3, 6]:
-            if morpion[i] == joueur and morpion[i+1] == joueur and morpion[i+2] == joueur:
-                is_victoire = True
-        # colonnes
-        if i in [0, 1, 2]:
-            if morpion[i] == joueur and morpion[i+3] == joueur and morpion[i+6] == joueur:
-                is_victoire = True
-        # diagonales
-        if i == 0:
-            if morpion[i] == joueur and morpion[i+4] == joueur and morpion[i+8] == joueur:
-                is_victoire = True
-        if i == 2:
-            if morpion[i] == joueur and morpion[i+2] == joueur and morpion[i+4] == joueur:
-                is_victoire = True
-        i += 1
-    return is_victoire
-
-'''
 def condition_victoire(): # Fonction qui vérifie si une condition de is_victoire est remplie
     #lignes
     is_victoire = False
@@ -139,7 +116,7 @@ def condition_victoire(): # Fonction qui vérifie si une condition de is_victoir
         is_victoire = True
     
     return is_victoire
-'''
+
 
 if __name__ == "__main__":
     joueur = jeu(nbtour,joueur)
