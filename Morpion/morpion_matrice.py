@@ -59,23 +59,22 @@ def condition_victoire(joueur: str) -> bool:
     is_victoire = False
     ligne, col = 0, 0
     # lignes
-    while ligne < len(morpion):
-        col = 0 # dégueu, mais temporaire - on réinitialise les variables
-        if morpion[ligne][col] is joueur and morpion[ligne][col+1] is joueur and morpion[ligne][col+2] is joueur:
-            is_victoire = True
-        ligne += 1
+    while ligne < len(morpion) and col < len(morpion[ligne]):
+        if ligne in [0,1,2] and col == 0:
+            if morpion[ligne][col] is joueur and morpion[ligne][col+1] is joueur and morpion[ligne][col+2] is joueur:
+                is_victoire = True        
     # colonnes
-    while col < len(morpion):
-        ligne = 0 # dégueu, mais temporaire - on réinitialise les variables
-        if morpion[ligne][col] is joueur and morpion[ligne+1][col] is joueur and morpion[ligne+2][col] is joueur:
-            is_victoire = True
-        col += 1
+        if col in [0,1,2] and ligne == 0:
+            if morpion[ligne][col] is joueur and morpion[ligne+1][col] is joueur and morpion[ligne+2][col] is joueur:
+                is_victoire = True
     # diagonales
-    ligne, col = 0, 0 # dégueu, mais temporaire - on réinitialise les variables
-    if morpion[ligne][col] is joueur and morpion[ligne+1][col+1] is joueur and morpion[ligne+2][col+2] is joueur:
-        is_victoire = True
-    if morpion[ligne][col+2] is joueur and morpion[ligne+1][col+1] is joueur and morpion[ligne+2][col] is joueur:
-        is_victoire = True
+        if ligne == 0 and col == 0:
+            if morpion[ligne][col] is joueur and morpion[ligne+1][col+1] is joueur and morpion[ligne+2][col+2] is joueur:
+                is_victoire = True
+            if morpion[ligne][col+2] is joueur and morpion[ligne+1][col+1] is joueur and morpion[ligne+2][col] is joueur:
+                is_victoire = True
+        ligne += 1
+        col +=1
     return is_victoire
 
 
