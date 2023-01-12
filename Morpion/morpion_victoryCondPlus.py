@@ -11,10 +11,20 @@ def afficher(): # une fonction bidon pour éviter d'utiliser cette horreur à ch
     print(morpion[6],morpion[7], morpion[8] + "\n")
 
 
-# fonction principale pour positionner un pion X ou O à une position entre 1 et 9
-def jeu(nbtour,joueur): 
+#fonction permettant de choisir le 1er joueur puis de faire 1 sur 2
+def choix_joueur(joueur: str):
     # On choisit le pion joué au premier tour uniquement
-    test_pionOK= True
+    print("TODO")
+    
+
+def choix_case():
+    print("TODO")
+    return joueur
+
+
+# fonction principale pour positionner un pion X ou O à une position entre 1 et 9
+def jeu(nbtour: int,joueur : str): 
+    test_pionOK = True
     if nbtour == 0:
         while test_pionOK: # On vérifie le pion joué
             # variable temporaire pour vérifier l'entrée
@@ -35,7 +45,7 @@ def jeu(nbtour,joueur):
     while test_caseOK:
         # variable temporaire pour vérifier l'entrée
         test_numcase = input("Indiquer la case à jouer :\n1, 2, 3,\n4, 5, 6,\n7, 8, 9\n -->")
-        # On vérifie la position choisie
+        # On vérifie la position choisie dans la longueur de notre liste
         if int(test_numcase) >= 1 and int(test_numcase) <=9:
             if morpion[int(test_numcase)-1] == "X" or morpion[int(test_numcase)-1] == "O":
                 print("__ERREUR__ : Cette case est déjà jouée, il faut en choisir une autre ! \n")
@@ -51,69 +61,35 @@ def jeu(nbtour,joueur):
     return joueur
 
 
-def condition_victoire(): # Fonction qui vérifie si une condition de victoireOK est remplie
-    #lignes
-    victoireOK = False
-    if morpion[0] == "X" and morpion[1] == "X" and morpion[2] == "X":
-        print("victoire ligne 1")
-        victoireOK = True
-    if morpion[3] == "X" and morpion[4] == "X" and morpion[5] == "X":
-        print("victoire ligne 2")
-        victoireOK = True
-    if morpion[6] == "X" and morpion[7] == "X" and morpion[8] == "X":
-        print("victoire ligne 3")
-        victoireOK = True
-    if morpion[0] == "O" and morpion[1] == "O" and morpion[2] == "O":
-        print("victoire ligne 1")
-        victoireOK = True
-    if morpion[3] == "O" and morpion[4] == "O" and morpion[5] == "O":
-        print("victoire ligne 2")
-        victoireOK = True
-    if morpion[6] == "O" and morpion[7] == "O" and morpion[8] == "O":
-        print("victoire ligne 3")
-        victoireOK = True
-    #colonnes
-    if morpion[0] == "X" and morpion[3] == "X" and morpion[6] == "X":
-        print("victoire colonne 1")
-        victoireOK = True
-    if morpion[1] == "X" and morpion[4] == "X" and morpion[7] == "X":
-        print("victoire colonne 2")
-        victoireOK = True
-    if morpion[2] == "X" and morpion[5] == "X" and morpion[8] == "X":
-        print("victoire colonne 3")
-        victoireOK = True
-    if morpion[0] == "O" and morpion[3] == "O" and morpion[6] == "O":
-        print("victoire colonne 1")
-        victoireOK = True
-    if morpion[1] == "O" and morpion[4] == "O" and morpion[7] == "O":
-        print("victoire colonne 2")
-        victoireOK = True
-    if morpion[2] == "O" and morpion[5] == "O" and morpion[8] == "O":
-        print("victoire colonne 3")
-        victoireOK = True
-    #diagonales
-    if morpion[0] == "X" and morpion[4] == "X" and morpion[8] == "X":
-        print("victoire diagonale 1")
-        victoireOK = True
-    if morpion[2] == "X" and morpion[4] == "X" and morpion[7] == "X":
-        print("victoire diagonale 2")
-        victoireOK = True
-    if morpion[0] == "O" and morpion[4] == "O" and morpion[8] == "O":
-        print("victoire diagonale 1")
-        victoireOK = True
-    if morpion[2] == "O" and morpion[4] == "O" and morpion[7] == "O":
-        print("victoire diagonale 2")
-        victoireOK = True
-    
-    return victoireOK
+def condition_victoire(joueur: str) -> bool:
+    is_victoire = False
+    i = 0
+    while i < len(morpion):
+        # lignes
+        if i in [0, 3, 6]:
+            if morpion[i] == joueur and morpion[i+1] == joueur and morpion[i+2] == joueur:
+                is_victoire = True
+        # colonnes
+        if i in [0, 1, 2]:
+            if morpion[i] == joueur and morpion[i+3] == joueur and morpion[i+6] == joueur:
+                is_victoire = True
+        # diagonales
+        if i == 0:
+            if morpion[i] == joueur and morpion[i+4] == joueur and morpion[i+8] == joueur:
+                is_victoire = True
+        if i == 2:
+            if morpion[i] == joueur and morpion[i+2] == joueur and morpion[i+4] == joueur:
+                is_victoire = True
+        i += 1
+    return is_victoire
 
 
 if __name__ == "__main__":
     joueur = jeu(nbtour,joueur)
-    while (nbtour < 9) and (condition_victoire() == False) : #tant que la victoire n'est pas déclarée on continue à jouer
+    while nbtour < 9 and condition_victoire(joueur) == False : #tant que la victoire n'est pas déclarée on continue à jouer
         nbtour += 1
         joueur = jeu(nbtour,joueur)
-        if condition_victoire():
+        if condition_victoire(joueur):
             print(f"_VICTOIRE_ du joueur : --- {joueur} ---")
     if nbtour >= 9:
         print("Nombre de tour terminé : __EGALITE__ !")
