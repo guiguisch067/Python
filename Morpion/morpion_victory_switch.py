@@ -60,7 +60,7 @@ def jeu(nbtour: int,joueur : str):
     afficher()
     return joueur
 
-
+'''
 def condition_victoire(joueur: str) -> bool:
     is_victoire = False
     i = 0
@@ -82,6 +82,17 @@ def condition_victoire(joueur: str) -> bool:
                 is_victoire = True
         i += 1
     return is_victoire
+'''
+
+
+def condition_victoire_match_case(joueur: str) -> bool:
+    is_victoire = False
+    match joueur:
+        # ligne 1
+        case morpion[0] and morpion[1] and morpion[2]:
+            is_victoire = True
+    return is_victoire
+
 
 
 if __name__ == "__main__":

@@ -89,7 +89,7 @@ def choix_case(joueur) -> str:
                 morpion.case8 = joueur
             case 9:
                 morpion.case9 = joueur
-            else:
+            case None:
                 print("__ERREUR__ : Vous avez entré un chiffre incorrect")
                 test = False # Entrée erronée, on réinitialise à False pour refaire un tour dans la boucle
     return case
