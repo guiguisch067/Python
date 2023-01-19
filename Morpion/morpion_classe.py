@@ -33,7 +33,7 @@ def choix_joueur():
     print(f"joueur : {joueur}")
     return joueur
 
-
+'''
 def choix_case(joueur) -> str:
     test = False # On initilaise à False pour rentrer dans la boucle
     while not test:
@@ -61,6 +61,37 @@ def choix_case(joueur) -> str:
         else:
             print("__ERREUR__ : Vous avez entré un chiffre incorrect")
             test = False # Entrée erronée, on réinitialise à False pour refaire un tour dans la boucle
+    return case
+'''
+
+def choix_case(joueur) -> str:
+    test = False # On initilaise à False pour rentrer dans la boucle
+    while not test:
+        test = True # une fois dans la boucle, on remet à True - repasse à False si erreur dans le "else"
+        case = int(input("Quelle est la case jouée ?"))
+        print(f"case : {case}")
+        match case:
+            case 1:
+                morpion.case1 = joueur
+            case 2:
+                morpion.case2 = joueur
+            case 3:
+                morpion.case3 = joueur
+            case 4:
+                morpion.case4 = joueur
+            case 5:
+                morpion.case5 = joueur
+            case 6:
+                morpion.case6 = joueur
+            case 7:
+                morpion.case7 = joueur
+            case 8:
+                morpion.case8 = joueur
+            case 9:
+                morpion.case9 = joueur
+            else:
+                print("__ERREUR__ : Vous avez entré un chiffre incorrect")
+                test = False # Entrée erronée, on réinitialise à False pour refaire un tour dans la boucle
     return case
 
 
