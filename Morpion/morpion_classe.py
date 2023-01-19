@@ -23,15 +23,23 @@ class Morpion:
       
 
     def afficher_Morpion(self) -> None: # une fonction bidon pour éviter d'utiliser cette horreur à chaque affichage
-        print(self.case1, self.case2, self.case3, "\n") 
-        print(self.case4, self.case5, self.case7, "\n") 
-        print(self.case7, self.case8, self.case9, "\n") 
+        print(f"{self.case1} {self.case2} {self.case3} \n") 
+        print(f"{self.case4} {self.case5} {self.case6} \n") 
+        print(f"{self.case7} {self.case8} {self.case9} \n") 
 
 
-def choix_joueur():
-    joueur = str(input("Quel est le joueur ?"))
-    print(f"joueur : {joueur}")
-    return joueur
+class Joueur:
+    def __init__(self) -> None:
+        self.joueur = str(input("Quel est le joueur ?"))
+        
+
+    def switch_joueur(self) -> str:
+        if joueur == "X":
+            self.joueur = "O"
+        else:
+            self.joueur = "X"
+        print(f"joueur : {self.joueur}")
+        return self.joueur
 
 
 def choix_case(joueur) -> str:
@@ -64,15 +72,39 @@ def choix_case(joueur) -> str:
     return case
 
 
-def is_victoire():
+def is_victoire(joueur) -> bool:
     victoire = False
-    #print("TODO")
-    return victoire
+    #lignes
+    if (morpion.case1 and morpion.case2 and morpion.case3) == joueur:
+        victoire = True
+    elif (morpion.case4 and morpion.case5 and morpion.case6) == joueur:
+        victoire = True
+    elif (morpion.case7 and morpion.case8 and morpion.case9) == joueur:
+        victoire = True
+    #colonnes
+    elif (morpion.case1 and morpion.case4 and morpion.case7) == joueur:
+        victoire = True
+    elif (morpion.case2 and morpion.case5 and morpion.case8) == joueur:
+        victoire = True
+    elif (morpion.case3 and morpion.case6 and morpion.case9) == joueur:
+        victoire = True
+    #diagonales
+    elif (morpion.case1 and morpion.case5 and morpion.case5) == joueur:
+        victoire = True
+    elif (morpion.case3 and morpion.case5 and morpion.case7) == joueur:
+        victoire = True
+    else:
+        return victoire
 
 
 if __name__ == "__main__":
     morpion = Morpion()
-    while not is_victoire():
-        joueur = choix_joueur()
+    joueur = Joueur()
+    while not is_victoire(joueur):
         choix_case(joueur)
         morpion.afficher_Morpion()
+        joueur = Joueur.switch_joueur(joueur)
+    if is_victoire(joueur):
+        print(f"__Victoire de : {joueur} __")
+    else:
+        print(f"__EGALITE, fin de la partie__")
