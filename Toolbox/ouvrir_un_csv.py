@@ -101,11 +101,3 @@ def devine_header_csv(fichier):
         reader = csv.reader(csvfile, dialect_deduit)
         for row in reader:
             print(row)
-
-
-def main():
-    devine_header_csv("TEHTRIS XDR - Endpoint - New filter.csv")
-
-
-if __name__ == "__main__":
-    main()
