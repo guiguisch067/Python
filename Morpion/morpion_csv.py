@@ -33,12 +33,14 @@ def affiche_morpion(morpion):
 
 def main():
     morpion = creation_morpion()
+    print(f"On affiche la matrice vide : {affiche_morpion(morpion)}")
     affiche_morpion(morpion)
     # Ou version expert : affiche_morpion(creation_morpion())
     joueur = input("X ou O")
-    with open(morpion, 'w+') as csvfile:
-        writer = csv.writer(csvfile, delimiter=' ', quotechar='|')
-        
+    with open(morpion, 'a') as csvfile:
+        csvwriter = csv.writer(csvfile, delimiter=' ', quotechar='|')
+        csvwriter.writerow(joueur)
+    print(f"On affiche la matrice avec joueur : {affiche_morpion(morpion)}")
 
 
 main()

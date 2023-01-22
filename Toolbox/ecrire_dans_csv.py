@@ -37,4 +37,4 @@ def ecrire_dans_csv_basique():
         write_csv.writerow(['9944461111333337',"rip en piece"])
 
 if __name__ == "__main__":
-   ecrire_dans_csv()
+   ecrire_dans_csv_basique()
