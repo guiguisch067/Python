@@ -7,40 +7,33 @@ import sys
 
 # Création du morpion vide
 
-def creation_morpion():
-    # data rows of csv file
-    rows = [ ['-', '-', '-'],
-            ['-', '-', '-'],
-            ['-', '-', '-'] ]
-    # name of csv file
-    morpion = "morpion.csv"
-    # writing to csv file
-    with open(morpion, 'w') as csvfile:
-        # creating a csv writer object
-        csvwriter = csv.writer(csvfile)
-        # writing the data rows
-        csvwriter.writerows(rows) 
-    return morpion
+# data rows of csv file
+rows = [ ['-', '-', '-'],
+        ['-', '-', '-'],
+        ['-', '-', '-'] ]
+# name of csv file
+morpion: str = "morpion.csv"
+# writing to csv file
+with open(morpion, 'w') as csvfile:
+    # creating a csv writer object
+    csvwriter = csv.writer(csvfile, delimiter=',', lineterminator='\n')
+    # writing the data rows
+    csvwriter.writerows(rows)
+    print("Quel est le joueur ? X ou O ")
+    joueur = str(input())
+    print("quelle est la position à jouer ? col : ")
+    col = int(input())
+    print("quelle est la position à jouer ? line : ")
+    line = int(input())
+    rows[line][col] = joueur
+    csvwriter.writerow(rows)
 
 
-def affiche_morpion(morpion):
+def affiche_morpion(morpion: str):
     with open(morpion, 'r', newline='') as csvfile:
-        reader = csv.reader(csvfile, delimiter=' ', quotechar='|')
+        reader = csv.reader(csvfile, delimiter=',', lineterminator='\n')
         for row in reader:
             print(', '.join(row))
-    
 
 
-def main():
-    morpion = creation_morpion()
-    print(f"On affiche la matrice vide : {affiche_morpion(morpion)}")
-    affiche_morpion(morpion)
-    # Ou version expert : affiche_morpion(creation_morpion())
-    joueur = input("X ou O")
-    with open(morpion, 'a') as csvfile:
-        csvwriter = csv.writer(csvfile, delimiter=' ', quotechar='|')
-        csvwriter.writerow(joueur)
-    print(f"On affiche la matrice avec joueur : {affiche_morpion(morpion)}")
-
-
-main()
+affiche_morpion(morpion)
