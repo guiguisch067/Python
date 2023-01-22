@@ -1,5 +1,6 @@
 #! python3
 
+import sys
 
 '''
 class Morpion:
@@ -9,8 +10,8 @@ class Morpion:
 '''
 
 
-class Morpion:
-    def __init__(self) -> None:
+class TicTacToe:
+    def __init__(self):
         self.case1 = "-"
         self.case2 = "-"
         self.case3 = "-"
@@ -23,87 +24,83 @@ class Morpion:
       
 
     def afficher_Morpion(self) -> None: # une fonction bidon pour éviter d'utiliser cette horreur à chaque affichage
-        print(self.case1, self.case2, self.case3, "\n") 
-        print(self.case4, self.case5, self.case7, "\n") 
-        print(self.case7, self.case8, self.case9, "\n") 
+        print(f"{self.case1} {self.case2} {self.case3} \n") 
+        print(f"{self.case4} {self.case5} {self.case6} \n") 
+        print(f"{self.case7} {self.case8} {self.case9} \n") 
 
 
-def choix_joueur():
-    joueur = str(input("Quel est le joueur ?"))
-    print(f"joueur : {joueur}")
-    return joueur
+class Player:
+    def __init__(self):
+        self.pion = "X" 
+        #TODO utiliser un input avec contrôle de l'entrée utilisateur
 
-'''
-def choix_case(joueur) -> str:
-    test = False # On initilaise à False pour rentrer dans la boucle
-    while not test:
-        test = True # une fois dans la boucle, on remet à True - repasse à False si erreur dans le "else"
-        case = int(input("Quelle est la case jouée ?"))
-        print(f"case : {case}")
-        if case == 1:
-            morpion.case1 = joueur
-        elif case == 2:
-            morpion.case2 = joueur
-        elif case == 3:
-            morpion.case3 = joueur
-        elif case == 4:
-            morpion.case4 = joueur
-        elif case == 5:
-            morpion.case5 = joueur
-        elif case == 6:
-            morpion.case6 = joueur
-        elif case == 7:
-            morpion.case7 = joueur
-        elif case == 8:
-            morpion.case8 = joueur
-        elif case == 9:
-            morpion.case9 = joueur
+
+    def switch_joueur(self):
+        if self.pion == "X":
+            self.pion = "O"
         else:
-            print("__ERREUR__ : Vous avez entré un chiffre incorrect")
-            test = False # Entrée erronée, on réinitialise à False pour refaire un tour dans la boucle
-    return case
-'''
-
-def choix_case(joueur) -> str:
-    test = False # On initilaise à False pour rentrer dans la boucle
-    while not test:
-        test = True # une fois dans la boucle, on remet à True - repasse à False si erreur dans le "else"
-        case = int(input("Quelle est la case jouée ?"))
-        print(f"case : {case}")
-        match case:
-            case 1:
-                morpion.case1 = joueur
-            case 2:
-                morpion.case2 = joueur
-            case 3:
-                morpion.case3 = joueur
-            case 4:
-                morpion.case4 = joueur
-            case 5:
-                morpion.case5 = joueur
-            case 6:
-                morpion.case6 = joueur
-            case 7:
-                morpion.case7 = joueur
-            case 8:
-                morpion.case8 = joueur
-            case 9:
-                morpion.case9 = joueur
-            case None:
-                print("__ERREUR__ : Vous avez entré un chiffre incorrect")
-                test = False # Entrée erronée, on réinitialise à False pour refaire un tour dans la boucle
-    return case
+            self.pion = "X"
+        print(f"C'est au tour du joueur : {self.pion}")
 
 
-def is_victoire():
+def choix_case(morpion:TicTacToe, joueur: Player) -> str:
+    case = int(input("Quelle est la case jouée ?"))
+    print(f"case : {case}")
+    if case == 1:
+        morpion.case1 = joueur.pion
+    elif case == 2:
+        morpion.case2 = joueur.pion
+    elif case == 3:
+        morpion.case3 = joueur.pion
+    elif case == 4:
+        morpion.case4 = joueur.pion
+    elif case == 5:
+        morpion.case5 = joueur.pion
+    elif case == 6:
+        morpion.case6 = joueur.pion
+    elif case == 7:
+        morpion.case7 = joueur.pion
+    elif case == 8:
+        morpion.case8 = joueur.pion
+    elif case == 9:
+        morpion.case9 = joueur.pion
+    else:
+        print("__ERREUR__ : Vous avez entré un chiffre incorrect")
+        sys.exit()
+
+
+def is_victoire(morpion: TicTacToe, joueur: Player) -> bool:
     victoire = False
-    #print("TODO")
+    #lignes
+    if (morpion.case1 and morpion.case2 and morpion.case3) == joueur.pion:
+        victoire = True
+    if (morpion.case4 and morpion.case5 and morpion.case6) == joueur.pion:
+        victoire = True
+    if (morpion.case7 and morpion.case8 and morpion.case9) == joueur.pion:
+        victoire = True
+    #colonnes
+    if (morpion.case1 and morpion.case4 and morpion.case7) == joueur.pion:
+        victoire = True
+    if (morpion.case2 and morpion.case5 and morpion.case8) == joueur.pion:
+        victoire = True
+    if (morpion.case3 and morpion.case6 and morpion.case9) == joueur.pion:
+        victoire = True
+    #diagonales
+    if (morpion.case1 and morpion.case5 and morpion.case9) == joueur.pion:
+        victoire = True
+    if (morpion.case3 and morpion.case5 and morpion.case7) == joueur.pion:
+        victoire = True
     return victoire
 
 
 if __name__ == "__main__":
-    morpion = Morpion()
-    while not is_victoire():
-        joueur = choix_joueur()
-        choix_case(joueur)
+    morpion = TicTacToe()
+    joueur = Player()
+    while True:
+        choix_case(morpion, joueur)
         morpion.afficher_Morpion()
+        if is_victoire(morpion, joueur):
+            print(f"__Victoire de : {joueur.pion} __")
+            sys.exit()
+        else:
+            joueur.switch_joueur()
