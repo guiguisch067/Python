@@ -89,7 +89,7 @@ def condition_victoire_match_case(joueur: str) -> bool:
     is_victoire = False
     match joueur:
         # ligne 1
-        case morpion[0] and morpion[1] and morpion[2]:
+        case morpion:
             is_victoire = True
     return is_victoire
 
@@ -97,10 +97,10 @@ def condition_victoire_match_case(joueur: str) -> bool:
 
 if __name__ == "__main__":
     joueur = jeu(nbtour,joueur)
-    while nbtour < 9 and condition_victoire(joueur) == False : #tant que la victoire n'est pas déclarée on continue à jouer
+    while nbtour < 9 and condition_victoire_match_case(joueur) == False : #tant que la victoire n'est pas déclarée on continue à jouer
         nbtour += 1
         joueur = jeu(nbtour,joueur)
-        if condition_victoire(joueur):
+        if condition_victoire_match_case(joueur):
             print(f"_VICTOIRE_ du joueur : --- {joueur} ---")
     if nbtour >= 9:
         print("Nombre de tour terminé : __EGALITE__ !")
